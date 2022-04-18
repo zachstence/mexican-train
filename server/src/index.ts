@@ -1,23 +1,3 @@
-import express from "express";
-import { createServer } from "http";
-import WebSocket from "ws";
+import { Game } from "./Game";
 
-const app = express();
-
-const server = createServer(app);
-
-const wss = new WebSocket.Server({ server });
-
-wss.on("connection", (ws) => {
-    console.log("connection");
-
-    ws.send("Hello");
-
-    ws.on("message", (data) => {
-        console.log(data.toString());
-    })
-});
-
-server.listen(process.env.PORT || 3001, () => {
-    console.log("Server started!");
-});
+const game = new Game();
