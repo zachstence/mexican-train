@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 import { Domino } from "../Domino";
 import { Player } from "../Player";
 import { GameStatus, GameStatusDebug } from "./types";
@@ -21,7 +23,8 @@ export class Game {
 
     public join(name: string) {
         const p = new Player(name);
-        this._players[p.id] = p;
+        const id = uuid();
+        this._players[id] = p;
     }
 
     public kick(playerId: string) {
@@ -34,14 +37,14 @@ export class Game {
 
     public getGameStatus(): GameStatus {
         return {
-            players: this._players,
-            playerTurn: this._playerTurnId,
+            players: Object.values(this._players),
         }
     }
 
     public getGameStatusDebug(): GameStatusDebug {
         return {
-            ...this.getGameStatus(),
+            players: this._players,
+            playerTurn: this._playerTurnId,
             pool: this._pool,
         }
     }

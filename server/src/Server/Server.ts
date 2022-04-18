@@ -2,10 +2,11 @@ import express from "express";
 import { createServer } from "http";
 import WebSocket from "ws";
 import { Game } from "../Game";
-import { Message } from "./types";
+import { Message, Response } from "./types";
 
 export class Server {
     private _wss: WebSocket.Server;
+    private _ws: WebSocket.WebSocket | undefined;
 
     private _game: Game = new Game();
 
@@ -18,6 +19,9 @@ export class Server {
             
             this._wss.on("connection", (ws) => {
                 console.log("New connection");
+
+                this._ws = ws;
+
                 ws.on("message", (d) => {
                     const raw = d.toString();
 
@@ -27,7 +31,7 @@ export class Server {
                     this.onMessage(m);
 
                     console.log(this._game.getGameStatusDebug());
-                    ws.send(JSON.stringify(this._game.getGameStatus()));
+                    this.sendStatus();
                 });
             })
         });
@@ -42,5 +46,16 @@ export class Server {
                 console.error(`Cannot process message of type ${m.type}`);
                 break;
         }
+    }
+
+    private sendStatus(): void {
+        if (!this._ws) return;
+
+        const response: Response = {
+            type: "status",
+            status: this._game.getGameStatus(),
+        }
+
+        this._ws.send(JSON.stringify(response));
     }
 }
