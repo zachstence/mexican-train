@@ -1,0 +1,15 @@
+<script lang="ts">
+    import { ws } from "$lib/stores/ws.store";
+
+    let name: string;
+
+    const join = () => {
+        ws.send({
+            type: "join",
+            name,
+        });
+    }
+</script>
+
+<input type="text" bind:value={name} />
+<button on:click={join}>Join</button>

@@ -1,5 +1,7 @@
 <script lang="ts">
     import { game } from "$lib/stores/game.store";
+
+    $: console.log($game);
 </script>
 
 
