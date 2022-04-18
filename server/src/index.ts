@@ -1,3 +1,4 @@
 import { Game } from "./Game";
+import { Server } from "./Server";
 
-const game = new Game();
+const server = new Server();

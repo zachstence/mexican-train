@@ -1,10 +1,8 @@
 import { Domino } from "./Domino";
 import { Player } from "./Player";
-import { WS } from "./WS";
+import { Server } from "./Server";
 
 export class Game {
-    private _ws: WS;
-
     private _pool: Array<Domino> = [];
 
     private _players: Record<string, Player> = {};
@@ -12,8 +10,6 @@ export class Game {
     private _playerTurnId: string | undefined;
 
     constructor(size: number = 12) {
-        this._ws = new WS();
-
         // Create dominoes
         for (let i = 1; i <= size; i++) {
             for (let j = i; j <= size; j++) {

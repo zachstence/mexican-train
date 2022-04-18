@@ -1,9 +1,12 @@
 import express from "express";
 import { createServer } from "http";
 import WebSocket from "ws";
+import { Game } from "./Game";
 
-export class WS {
+export class Server {
     private _wss: WebSocket.Server;
+
+    private _game: Game = new Game();
 
     constructor() {
         const server = createServer(express());
