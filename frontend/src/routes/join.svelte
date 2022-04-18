@@ -1,4 +1,6 @@
 <script lang="ts">
+import { goto } from "$app/navigation";
+
     import { ws } from "$lib/stores/ws.store";
 
     let name: string;
@@ -8,6 +10,8 @@
             type: "join",
             name,
         });
+
+        goto("/");
     }
 </script>
 
