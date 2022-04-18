@@ -1,8 +1,8 @@
+import { GameStatus, GameStatusDebug } from "lib";
 import { v4 as uuid } from "uuid";
 
-import { Domino } from "../Domino";
-import { Player } from "../Player";
-import { GameStatus, GameStatusDebug } from "./types";
+import { Domino } from "./Domino";
+import { Player } from "./Player";
 
 export class Game {
     private _pool: Array<Domino> = [];

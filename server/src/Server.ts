@@ -1,8 +1,8 @@
 import express from "express";
 import { createServer } from "http";
 import WebSocket from "ws";
-import { Game } from "../Game";
-import { Message, Response } from "./types";
+import { Game } from "./Game";
+import { Message, StatusMessage } from "lib";
 
 export class Server {
     private _wss: WebSocket.Server;
@@ -51,7 +51,7 @@ export class Server {
     private sendStatus(): void {
         if (!this._ws) return;
 
-        const response: Response = {
+        const response: StatusMessage = {
             type: "status",
             status: this._game.getGameStatus(),
         }

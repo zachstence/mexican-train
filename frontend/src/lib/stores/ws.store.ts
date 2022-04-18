@@ -1,13 +1,12 @@
 import websocketStore from "svelte-websocket-store";
 import { browser } from "$app/env";
 import { writable, type Writable } from "svelte/store";
-import type { Request } from "$lib/types/Request.types";
-import type { Response } from "$lib/types/Response.types";
+import type { Message } from "lib";
 
 const createWs = () => {
-    let _ws: Writable<Request | Response> = writable();
+    let _ws: Writable<Message> = writable();
 
-    const send = (m: Request) => {
+    const send = (m: Message) => {
         if (!_ws) return;
 
         _ws.set(m);

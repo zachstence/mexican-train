@@ -1,10 +1,7 @@
 import { writable } from "svelte/store";
+import type { Message, GameStatus } from "lib";
 
-export { ws } from "./ws.store";
-import type { GameStatus } from "$lib/types/Game.types";
 import { ws } from "./ws.store";
-import type { Request } from "$lib/types/Request.types";
-import type { Response } from "$lib/types/Response.types";
 
 const initialValue: GameStatus = {
     players: [],
@@ -20,7 +17,7 @@ const join = (name: string): void => {
 const createGame = () => {
     const { subscribe, set } = writable<GameStatus>(initialValue);
 
-    ws.subscribe((m: Request | Response) => {
+    ws.subscribe((m: Message) => {
         if (m && m.type === "status") {
             set(m.status);
         }

@@ -1,4 +1,6 @@
-export class Domino {
+import { IDomino } from "lib";
+
+export class Domino implements IDomino {
     private _head: number;
     private _tail: number;
 
