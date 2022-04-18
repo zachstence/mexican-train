@@ -1,9 +1,7 @@
-import { IDomino } from "./Domino";
-import { IPlayer } from "./Player";
+import type { IDomino } from "./Domino";
+import type { IPlayer } from "./Player";
 
-export interface IGame {
-    
-}
+export interface IGame {}
 
 export interface GameStatus {
     players: Array<IPlayer>;
