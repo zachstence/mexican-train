@@ -1,6 +1,6 @@
-import { Domino } from "./Domino";
-import { Player } from "./Player";
-import { Server } from "./Server";
+import { Domino } from "../Domino";
+import { Player } from "../Player";
+import { GameStatus, GameStatusDebug } from "./types";
 
 export class Game {
     private _pool: Array<Domino> = [];
@@ -30,5 +30,19 @@ export class Game {
 
     public getPool(): Array<Domino> {
         return this._pool;
+    }
+
+    public getGameStatus(): GameStatus {
+        return {
+            players: this._players,
+            playerTurn: this._playerTurnId,
+        }
+    }
+
+    public getGameStatusDebug(): GameStatusDebug {
+        return {
+            ...this.getGameStatus(),
+            pool: this._pool,
+        }
     }
 }
