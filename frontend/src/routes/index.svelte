@@ -1,16 +1,11 @@
 <script lang="ts">
-import { onMount } from "svelte";
-
     import Domino from "../lib/components/Domino.svelte";
+    import { ws } from "$lib/stores/ws.store";
 
-    onMount(() => {
-        const ws = new WebSocket("ws://localhost:3001");
-
-        ws.addEventListener("open", () => {
-            ws.send("bing bong");
-        })
-    });
-
+    ws.send({ msg: "sending a message" })
 </script>
 
 <Domino head={1} tail={2} />
+
+
+{JSON.stringify($ws, null, 2)}
